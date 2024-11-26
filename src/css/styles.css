@@ -1,10 +1,126 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-/* Common styles */
 @import url('./reset.css');
-/* Sections style */
 
+.back-link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+/* #region Gallery */
+.gallery {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1128px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+body .sl-overlay {
+    background: #2E2F42;
+}
+
+.sl-wrapper.lightbox .sl-counter {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+}
+
+.sl-wrapper .sl-navigation button.sl-next {
+    color: #FFFFFF;
+}
+
+.sl-wrapper .sl-navigation button.sl-prev {
+    color: #FFFFFF;
+}
+
+.sl-wrapper button.sl-close {
+    color: #FFFFFF;
+}
+
+.gallery-item {
+    width: calc((100% - 48px) / 3);
+}
+
+.gallery-image {
+    width: 100%;
+}
+
+.gallery-link {
+    display: inline-block;
+    width: 100%;
+}
+/* #endregion Gallery */
+
+/* #region Form */
+.feedback-form {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+}
+
+input, .t-arr {
+    box-sizing: border-box;
+    padding: 8px 16px;
+    margin: 8px 0;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    width: 360px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+}
+
+input:hover, .t-arr:hover {
+    border: 1px solid #000;
+}
+
+.t-arr {
+    width: 360px;
+    resize: none;
+}
+
+button {
+    margin-top: 8px;
+    background-color: #4e75ff;
+    border-radius: 8px;
+    border: none;
+    padding: 8px 16px;
+    width: 95px;
+    height: 40px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #6c8cff;
+}
+/* #endregion Form */

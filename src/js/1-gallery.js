@@ -1,6 +1,3 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 const images = [
   {
     preview:
@@ -67,26 +64,34 @@ const images = [
   },
 ];
 
-const galleryWrapper = document.querySelector('.gallery');
-const galleryItems = images
-  .map(({ preview, original, description }) => {
-    return `
-      <li class="gallery-item">
-        <a class="gallery-link" href="${original}">
-          <img
-            class="gallery-image"
-            src="${preview}"
-            alt="${description}"
-          />
-        </a>
-      </li>
-    `;
-  })
-  .join('');
+const imgBox = document.querySelector('.gallery');
 
-galleryWrapper.innerHTML = galleryItems;
-const lightbox = new SimpleLightbox('.gallery a', {
+function createGallery(images) {
+  const gallery = images.map(function (image) {
+    const { preview, original, description } = image;
+    return `<li class="gallery-item">
+              <a class="gallery-link" href="${original}">
+                <img
+                  class="gallery-image"
+                  src="${preview}"
+                  alt="${description}"
+                  width="360" 
+                  height="200"
+                />
+              </a>
+            </li>`;
+  });
+  imgBox.innerHTML = gallery.join('');
+}
+createGallery(images);
+
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const gallery = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
-  captionPosition: 'bottom',
   captionDelay: 250,
+  className: 'lightbox',
+  overlayOpacity: 0.8,
 });
+gallery.on('show.simplelightbox', function () {});
