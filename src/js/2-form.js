@@ -1,29 +1,39 @@
-'use strict';
+const formData = { email: '', message: '' };
 
-const form = document.querySelector('.feedback-form');
-const emailInput = document.querySelector('input');
-const textArea = document.querySelector('textarea');
-const button = document.querySelector('button');
-const localStorageKey = 'feedback-form-state';
-const localStorageValue = localStorage.getItem('feedback-form-state');
+const form = document.querySelector('form.feedback-form');
+const input = document.querySelector('input');
+const textarea = document.querySelector('textarea');
 
-try {
-  emailInput.value = JSON.parse(localStorageValue).email ?? '';
-  textArea.value = JSON.parse(localStorageValue).message ?? '';
-} catch {}
-form.addEventListener('input', event => {
-  event.preventDefault();
-  const result = { email: `${emailInput.value}`, message: `${textArea.value}` };
-  localStorage.setItem('feedback-form-state', JSON.stringify(result));
-});
+const localData = localStorage.getItem('feedback-form-state');
+if (localData) {
+  const { email, message } = JSON.parse(localData);
+  formData.email = email;
+  formData.message = message;
+  input.value = email;
+  textarea.value = message;
+}
 
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  const result = localStorage.getItem('feedback-form-state');
-  if (!result.email || !result.message) {
-    return alert('Fill please all fields');
-  }
-  console.log(JSON.parse(result));
-  localStorage.clear();
-  form.reset();
-});
+const handleChangeInput = e => {
+  formData.email = e.target.value.trim();
+  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+};
+const handleChangeTextarea = e => {
+  formData.message = e.target.value.trim();
+  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+};
+const handleSubmit = e => {
+  e.preventDefault();
+
+  if (formData.email !== '' && formData.message !== '') {
+    console.log(formData);
+  } else alert('Fill please all fields');
+  localStorage.removeItem('feedback-form-state');
+  formData.email = '';
+  formData.message = '';
+  input.value = '';
+  textarea.value = '';
+};
+
+input.addEventListener('input', handleChangeInput);
+textarea.addEventListener('input', handleChangeTextarea);
+form.addEventListener('submit', handleSubmit);

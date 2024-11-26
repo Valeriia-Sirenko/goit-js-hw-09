@@ -1,8 +1,6 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const galleryRef = document.querySelector('.gallery');
-
 const images = [
   {
     preview:
@@ -69,25 +67,30 @@ const images = [
   },
 ];
 
-let instanceModal;
-const galleryMarkup = images
-  .map(
-    ({ preview, original, description }) => `
-<li class="gallery-item">
-  <a class="gallery-link" href="${original}">
-    <img
-      class="gallery-image"
-      src="${preview}"
-      alt="${description}"
-    />
-  </a>
-</li>
-`
-  )
-  .join('');
-galleryRef.innerHTML = galleryMarkup;
+const gallery = document.querySelector('ul.gallery');
 
-const lightbox = new SimpleLightbox('.gallery a', {
+let itemStr = '';
+
+images.map(
+  image =>
+    (itemStr += `<li class="gallery-item">
+	<a class="gallery-link" href=${image.original}>
+		<img 
+			class="gallery-image" 
+			src=${image.preview} 
+			alt=${image.description} 
+			/>
+	</a>
+</li>`)
+);
+
+gallery.insertAdjacentHTML('beforeend', itemStr);
+
+let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
+  className: 'bg-color',
+  overlayOpacity: 0.2,
 });
+
+lightbox.on('show.simplelightbox');
